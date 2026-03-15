@@ -15,6 +15,7 @@ app.use('/uploads', express.static('uploads'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
+// this is a test comment
 mongoose.connect('mongodb+srv://' + process.env.MONGO_ATLAS_USER + ':' + process.env.MONGO_ATLAS_PW + '@node-rest-shop.hjvd4.mongodb.net/?retryWrites=true&w=majority&appName=node-rest-shop');
 
 app.use((req, res, next) => {
