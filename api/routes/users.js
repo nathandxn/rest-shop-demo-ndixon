@@ -62,6 +62,7 @@ router.post('/signup', (req, res, next) => {
 });
 
 router.post('/login', (req, res, next) => {
+    console.log('Login attempt for user: ' + req.body.email + ' with password: ' + req.body.password);
     User.find({ email: req.body.email })
         .exec()
         .then(user => {
