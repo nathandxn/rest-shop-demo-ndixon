@@ -6,7 +6,6 @@ const jwt = require('jsonwebtoken');
 
 const User = require('../models/user');
 
-
 router.post('/signup', (req, res, next) => {
 
     // check users to avoid duplicate emails
@@ -77,10 +76,11 @@ router.post('/login', (req, res, next) => {
                     });
                 }
                 if (result) {
+                    const jwtSecret = process.env.JWT_KEY || 'supersecretkey123';
                     const token = jwt.sign({
                         email: user[0].email,
                         userId: user[0]._id
-                    }, process.env.JWT_KEY,
+                    }, jwtSecret,
                     {
                         expiresIn: "1h"
                     }
