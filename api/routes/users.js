@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 
 const User = require('../models/user');
 
-
+// adding another test comment
 router.post('/signup', (req, res, next) => {
 
     // check users to avoid duplicate emails
