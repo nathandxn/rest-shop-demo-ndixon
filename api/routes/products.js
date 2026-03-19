@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const multer = require('multer');
+const fs = require('fs');
+const path = require('path');
 const checkAuth = require('../middleware/check-auth');
 
 const storage = multer.diskStorage({
@@ -121,6 +123,19 @@ router.delete('/:productId', checkAuth, (req, res, next) => {
             console.log(err);
             res.status(500).json({error: err});
         });
+});
+
+router.get('/image/download', (req, res, next) => {
+    const filename = req.query.filename;
+    const filePath = path.join('./uploads/', filename);
+
+    fs.readFile(filePath, (err, data) => {
+        if (err) {
+            return res.status(404).json({ message: 'File not found' });
+        }
+        res.setHeader('Content-Type', 'application/octet-stream');
+        res.send(data);
+    });
 });
 
 module.exports = router;
